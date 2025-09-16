@@ -23,6 +23,38 @@ document.querySelectorAll('.icon-box').forEach(box => {
         popup.style.left = '100%';
         popup.style.right = 'auto';
     }
+    const screenWidth = window.innerWidth;
+const screenHeight = window.innerHeight;
+
+if (screenWidth <= 600) {
+  // Центрируем попап
+  popup.style.position = 'fixed';
+  popup.style.top = '50%';
+  popup.style.left = '50%';
+  popup.style.transform = 'translate(-50%, -50%)';
+  popup.style.width = 'min(90%, 400px)';  // ограничиваем ширину
+  popup.style.maxHeight = '90vh';         // чтобы не вылезал по высоте
+  popup.style.overflowY = 'auto';        // скролл внутри попапа если текст длинный
+} else {
+  // Десктоп
+  popup.style.position = 'absolute';
+  const rect = box.getBoundingClientRect();
+  const popupWidth = Math.min(popup.offsetWidth, 300); // ограничиваем ширину
+  if (rect.right + popupWidth > screenWidth) {
+    popup.style.left = 'auto';
+    popup.style.right = '100%';
+  } else {
+    popup.style.left = '100%';
+    popup.style.right = 'auto';
+  }
+  popup.style.top = '0';
+  popup.style.transform = 'none';
+  popup.style.width = 'auto';
+  popup.style.maxWidth = '300px';
+  popup.style.maxHeight = 'none';
+  popup.style.overflowY = 'visible';
+}
+
 });
 
 // Клик в любом месте страницы закрывает все открытые popup
@@ -98,22 +130,5 @@ function animate() {
 }
 animate();
 
-const screenWidth = window.innerWidth;
 
-if(screenWidth < 600) {
-  popup.style.position = 'fixed';
-  popup.style.top = '50%';
-  popup.style.left = '50%';
-  popup.style.transform = 'translate(-50%, -50%)';
-  popup.style.width = '90%';
-  popup.style.maxWidth = '400px';
-} else {
-  popup.style.position = 'absolute';
-  popup.style.top = '0';
-  popup.style.left = '100%';
-  popup.style.right = 'auto';
-  popup.style.transform = 'none';
-  popup.style.width = 'auto';
-  popup.style.maxWidth = '300px';
-}
 
