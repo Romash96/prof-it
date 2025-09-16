@@ -1,7 +1,6 @@
 body {
      margin: 0;
-    background: black; /* фон как в Матрице */
-    overflow: hidden; 
+    background: black; /* фон как в Матрице */ 
 }
 
 .icon-box {
@@ -16,6 +15,9 @@ body {
     position: relative;
     /* для popup */
     text-align: center;
+    flex: 1 1 calc(25% - 20px); /* 4 в ряд на больших экранах */
+   max-width: 100px;
+  box-sizing: border-box;
 }
 
 
@@ -126,4 +128,18 @@ canvas {
 @keyframes flicker {
   0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
   20%, 24%, 55% { opacity: 0.3; }
+}
+
+@media (max-width: 900px) {
+  .icon-box {
+    flex: 1 1 calc(50% - 20px); /* 2 в ряд на планшете */
+    max-width: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 500px) {
+  .icon-box {
+    flex: 1 1 100%; /* 1 в ряд на телефоне */
+    max-width: 100%;
+  }
 }

@@ -98,4 +98,22 @@ function animate() {
 }
 animate();
 
+const screenWidth = window.innerWidth;
+
+if(screenWidth < 600) {
+  popup.style.position = 'fixed';
+  popup.style.top = '50%';
+  popup.style.left = '50%';
+  popup.style.transform = 'translate(-50%, -50%)';
+  popup.style.width = '90%';
+  popup.style.maxWidth = '400px';
+} else {
+  popup.style.position = 'absolute';
+  popup.style.top = '0';
+  popup.style.left = '100%';
+  popup.style.right = 'auto';
+  popup.style.transform = 'none';
+  popup.style.width = 'auto';
+  popup.style.maxWidth = '300px';
+}
 
