@@ -1,0 +1,129 @@
+body {
+     margin: 0;
+    background: black; /* фон как в Матрице */
+    overflow: hidden; 
+}
+
+.icon-box {
+    display: inline-flex;
+    /* inline-flex, чтобы несколько блоков выстраивались в ряд */
+    flex-direction: column;
+    /* вертикальная колонка */
+    align-items: center;
+    /* центрирование по горизонтали */
+    margin: 15px;
+    cursor: pointer;
+    position: relative;
+    /* для popup */
+    text-align: center;
+}
+
+
+.icon-box img {
+    width: 60px;
+    height: 60px;
+    transition: transform 0.3s;
+}
+
+.icon-box:hover img {
+    transform: scale(1.1);
+}
+
+/* Скрытый блок справа */
+.popup {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    /* изначально за пределами справа */
+    width: auto;
+    max-width: 300px;
+    background: #f0f0f0;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transform: translateX(20px);
+    transition: all 0.3s ease;
+    word-wrap: break-word;
+    /* перенос длинных слов */
+    white-space: normal;
+    /* текст переносится на несколько строк */
+    text-align: left;
+    z-index: 1000;
+    pointer-events: none;
+    
+
+}
+
+/* Когда активен */
+.icon-box.active .popup {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+}
+
+.close-popup {
+    position: absolute;
+    top: 5px;
+    right: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+h1 {
+    color: #39ff14;
+  text-align: center;
+  font-family: monospace;
+  animation: flicker 2s infinite;
+  position: relative;
+  z-index: 2;
+  padding: 20px;
+  background: linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
+  margin: 0;
+  font-size: 40px;
+}
+
+.popup ul {
+  margin: 0;
+  padding-left: 20px; /* отступ для цифр списка */
+}
+
+.icon-container {
+  display: flex;           /* все иконки в ряд */
+  flex-wrap: wrap;         /* перенос на новую строку если не помещается */
+  justify-content: center; /* центрируем ряд иконок */
+  gap: 20px;               /* расстояние между иконками */
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+span {
+    color: #e0e0e0;
+    font-weight: bold;
+    background-color: rgba(20,20,20,0.7);
+    padding: 2px;
+    border-radius: 4px;
+    box-shadow: 2px 2px 8px #299908;
+    font-family: monospace;
+}
+
+canvas {
+    display: block;
+}
+
+#matrix {
+    position: fixed;  /* фиксируем относительно документа или родителя */
+    top: 0px;           /* ниже заголовка, под ним (можно подогнать) */
+    left: 0;
+    width: 100%;
+    height: 100%; /* занимает пространство под заголовком */
+    z-index: 0;
+    pointer-events: none;           /* позади иконок */
+}
+
+@keyframes flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+  20%, 24%, 55% { opacity: 0.3; }
+}
